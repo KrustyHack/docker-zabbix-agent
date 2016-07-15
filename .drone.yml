@@ -1,2 +1,2 @@
 build:
-	image: golang
+	image: centos:centos7
