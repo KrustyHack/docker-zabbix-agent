@@ -1,7 +1,5 @@
 ## Zabbix Agent Docker Image
 
-[![Circle CI](https://circleci.com/gh/million12/docker-zabbix-agent/tree/master.svg?style=svg&circle-token=c12c61948ad16f75903de19a2001d982cd17809d)](https://circleci.com/gh/million12/docker-zabbix-agent/tree/master)
-
 This is a [million12/zabbix-agent](https://registry.hub.docker.com/u/million12/zabbix-agent/) docker image with Zabbix Agent. It's based on CentOS-7 official image.  
 
 The Zabbix agent has been patched to read system informations from these directories:  
@@ -54,4 +52,4 @@ The Zabbix agent has been patched to read system informations from these directo
 
 ## Author  
 Author: Przemyslaw Ozgo (<linux@ozgo.info>)  
-This work is also inspired by [million12](https://github.com/million12/docker-zabbix-agent).
+This work is also inspired by [million12](https://github.com/million12).
