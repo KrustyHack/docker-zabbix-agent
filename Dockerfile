@@ -1,11 +1,11 @@
 FROM centos:centos7
-MAINTAINER Przemyslaw Ozgo linux@ozgo.info
+MAINTAINER KrustyHack webmaster@nicolashug.com
 
 ENV ZABBIX_VERSION=3.0.1 \
-    ZABBIX_SERVER=127.0.0.1 \
-    HOSTNAME=zabbix.agent \
-    HOST_METADATA=zabbix.agent \
-    CONFIG_FILE=/usr/local/etc/zabbix_agentd.conf
+  ZABBIX_SERVER=127.0.0.1 \
+  HOSTNAME= \
+  HOST_METADATA=zabbix.agent \
+  CONFIG_FILE=/usr/local/etc/zabbix_agentd.conf
 
 RUN \
   yum clean all && yum makecache && \
@@ -24,7 +24,7 @@ RUN \
 COPY container-files /
 
 RUN \
-    chown -R zabbix:wheel /usr/local/etc/
+  chown -R zabbix:wheel /usr/local/etc/
 
 USER zabbix
 

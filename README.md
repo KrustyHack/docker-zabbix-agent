@@ -1,15 +1,6 @@
 ## Zabbix Agent Docker Image
 
 [![Circle CI](https://circleci.com/gh/million12/docker-zabbix-agent/tree/master.svg?style=svg&circle-token=c12c61948ad16f75903de19a2001d982cd17809d)](https://circleci.com/gh/million12/docker-zabbix-agent/tree/master)
-[![GitHub Open Issues](https://img.shields.io/github/issues/million12/docker-zabbix-agent.svg)](https://github.com/million12/docker-zabbix-agent/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/million12/docker-zabbix-agent.svg)](https://github.com/million12/docker-zabbix-agent)
-[![GitHub Forks](https://img.shields.io/github/forks/million12/docker-zabbix-agent.svg)](https://github.com/million12/docker-zabbix-agent)  
-[![Stars on Docker Hub](https://img.shields.io/docker/stars/million12/zabbix-agent.svg)](https://hub.docker.com/r/million12/zabbix-agent)
-[![Pulls on Docker Hub](https://img.shields.io/docker/pulls/million12/zabbix-agent.svg)](https://hub.docker.com/r/million12/zabbix-agent)  
-[![Docker Layers](https://badge.imagelayers.io/million12/zabbix-agent:latest.svg)](https://hub.docker.com/r/million12/zabbix-agent)
-
-
- [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/million12/docker-zabbix-agent/tree/master)
 
 This is a [million12/zabbix-agent](https://registry.hub.docker.com/u/million12/zabbix-agent/) docker image with Zabbix Agent. It's based on CentOS-7 official image.  
 
@@ -28,7 +19,7 @@ The Zabbix agent has been patched to read system informations from these directo
 ## ENV variables
 
 `ZABBIX_SERVER` - Zabbix Server address  
-`HOSTNAME` - hostname  
+`HOSTNAME` - hostname  (will check /etc/hostname if not manually configured)
 `HOST_METADATA` - the metadata value shared by all servers on the same cluster. This value will match the autoregistration action  
 `CONFIG_FILE` - config file path. (Used if custom file and path needed)
 
@@ -63,8 +54,4 @@ The Zabbix agent has been patched to read system informations from these directo
 
 ## Author  
 Author: Przemyslaw Ozgo (<linux@ozgo.info>)  
-This work is also inspired by [bhuisgen's](https://github.com/bhuisgen) work on his [docker images](https://github.com/bhuisgen/docker-zabbix-coreos). Many thanks!
-
----
-
-**Sponsored by [Prototype Brewery](http://prototypebrewery.io/)** - the new prototyping tool for building highly-interactive prototypes of your website or web app. Built on top of [Neos CMS](https://www.neos.io/) and [Zurb Foundation](http://foundation.zurb.com/) framework.
+This work is also inspired by [million12](https://github.com/million12/docker-zabbix-agent).

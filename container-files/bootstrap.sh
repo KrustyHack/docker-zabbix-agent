@@ -22,9 +22,12 @@ update_config() {
       log "Changing Zabbix Server IP to ${bold}${white}${ZABBIX_SERVER}${reset}"
       sed -i 's/Server=127.0.0.1/Server='$ZABBIX_SERVER'/g' ${CONFIG_FILE}
     fi
-    if [[ "$HOSTNAME" != "zabbix.agent" ]]; then
+    if [[ "$HOSTNAME" != "" ]]; then
       log "Changing Zabbix Hostname to ${bold}${white}${HOSTNAME}${reset}."
       sed -i 's/Hostname=Zabbix server/Hostname='$HOSTNAME'/g' ${CONFIG_FILE}
+    else
+      log "Changing Zabbix Hostname to ${bold}${white}$(cat /etc/hostname)${reset}."
+      sed -i 's/Hostname=Zabbix server/Hostname='$(cat /etc/hostname)'/g' ${CONFIG_FILE}
     fi
     if [[ "$HOST_METADATA" != "zabbix.agent" ]]; then
       log "Changing Zabbix Host Metadata to ${bold}${white}${HOST_METADATA}${reset}."

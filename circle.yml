@@ -10,7 +10,7 @@ dependencies:
   pre:
     - docker pull centos:centos7
   post:
-      - docker build -t million12/zabbix-agent .
+      - docker build -t krustyhack/zabbix-agent .
 
 test:
   override:
