@@ -10,7 +10,7 @@ ENV ZABBIX_VERSION=3.0.1 \
 
 RUN \
   yum clean all && yum makecache && \
-  yum install --nogpgcheck -y svn automake gcc make iproute openssl-devel
+  yum install --nogpgcheck -y svn automake gcc make iproute openssl openssl-devel
 RUN \
   svn co svn://svn.zabbix.com/tags/${ZABBIX_VERSION} /usr/local/src/zabbix && \
   cd /usr/local/src/zabbix && \

@@ -49,15 +49,22 @@ update_config() {
 
       ##### First run #####
       if [[ ! -f /home/zabbix/zabbix_agentd.psk ]]; then
-	      log "Generating rand hex..."
-        RAND_HEX=`date +%s | sha256sum | base64 | head -c 32`
+	mkdir -p /home/zabbix/
+        log "Generating rand hex..."
+        RAND_HEX=`openssl rand -hex 32`
         echo $RAND_HEX > /home/zabbix/zabbix_agentd.psk
         log "GENERATED ZABBIX RAND HEX to ${bold}${white}${RAND_HEX}${reset}."
 
+        log "/home/zabbix/zabbix_agentd.psk exists with value : "
+
         log "Changing Zabbix TLSPSKFile to ${bold}${white}/home/zabbix/zabbix_agentd.psk${reset}."
         sed -i 's/# TLSPSKFile=/TLSPSKFile=\/home\/zabbix\/zabbix_agentd.psk/g' ${CONFIG_FILE}
+      else
+        log "/home/zabbix/zabbix_agentd.psk exists with value : " 
+	cat /home/zabbix/zabbix_agentd.psk
       fi
     fi
+
     log "Config updated"
 }
 print_config() {
@@ -69,7 +76,7 @@ print_config() {
 }
 start() {
     log "Starting Zabbix Agent using configuration file: ${CONFIG_FILE}"
-    print_config
+    #print_config
     zabbix_agentd -f -c ${CONFIG_FILE}
 }
 
