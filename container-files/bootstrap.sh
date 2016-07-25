@@ -3,6 +3,9 @@ set -eu
 export TERM=xterm
 # Agent ConfigFile
 CONFIG_FILE="/usr/local/etc/zabbix_agentd.conf"
+if [[ "$HOSTNAME" == "" ]]; then
+  HOSTNAME=`cat /etc/hostname`
+fi
 # Bash Colors
 red=`tput setaf 1`
 green=`tput setaf 2`
@@ -22,13 +25,8 @@ update_config() {
       log "Changing Zabbix Server IP to ${bold}${white}${ZABBIX_SERVER}${reset}"
       sed -i 's/Server=127.0.0.1/Server='$ZABBIX_SERVER'/g' ${CONFIG_FILE}
     fi
-    if [[ "$HOSTNAME" != "" ]]; then
-      log "Changing Zabbix Hostname to ${bold}${white}${HOSTNAME}${reset}."
-      sed -i 's/Hostname=Zabbix server/Hostname='$HOSTNAME'/g' ${CONFIG_FILE}
-    else
-      log "Changing Zabbix Hostname to ${bold}${white}$(cat /etc/hostname)${reset}."
-      sed -i 's/Hostname=Zabbix server/Hostname='$(cat /etc/hostname)'/g' ${CONFIG_FILE}
-    fi
+    log "Changing Zabbix Hostname to ${bold}${white}${HOSTNAME}${reset}."
+    sed -i 's/Hostname=Zabbix server/Hostname='$HOSTNAME'/g' ${CONFIG_FILE}
     if [[ "$HOST_METADATA" != "zabbix.agent" ]]; then
       log "Changing Zabbix Host Metadata to ${bold}${white}${HOST_METADATA}${reset}."
       sed -i 's/# HostMetadata=/HostMetadata='$HOST_METADATA'/g' ${CONFIG_FILE}
@@ -49,7 +47,7 @@ update_config() {
 
       ##### First run #####
       if [[ ! -f /home/zabbix/zabbix_agentd.psk ]]; then
-	mkdir -p /home/zabbix/
+	      mkdir -p /home/zabbix/
         log "Generating rand hex..."
         RAND_HEX=`openssl rand -hex 32`
         echo $RAND_HEX > /home/zabbix/zabbix_agentd.psk
