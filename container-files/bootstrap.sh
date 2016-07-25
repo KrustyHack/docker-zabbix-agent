@@ -35,7 +35,7 @@ update_config() {
     fi
 
     ##### Zabbix psk conf #####
-    if [[ "$ZABBIX_PSK" == "yes" ]]; then
+    if [ "$ZABBIX_PSK" == "yes" ]; then
       log "Updating Zabbix psk configuration..."
 
       log "Generating rand hex..."

@@ -14,7 +14,7 @@ RUN \
   svn co svn://svn.zabbix.com/tags/${ZABBIX_VERSION} /usr/local/src/zabbix && \
   cd /usr/local/src/zabbix && \
   ./bootstrap.sh && \
-  ./configure --enable-agent && \
+  ./configure --enable-agent --with-openssl && \
   make install && \
   rpm -e --nodeps make gcc && \
   yum remove -y svn automake && \
