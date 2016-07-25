@@ -5,6 +5,7 @@ machine:
     ZABBIX_SERVER: my.server.com
     HOSTNAME: my.hostname.com
     HOST_METADATA: my.metadata.com
+    ZABBIX_PSK: yes
 
 dependencies:
   pre:
@@ -14,7 +15,7 @@ dependencies:
 
 test:
   override:
-    - docker run -d --name zabbix-agent --net host -e ZABBIX_SERVER=$ZABBIX_SERVER -e HOSTNAME=$HOSTNAME -e HOST_METADATA=$HOST_METADATA krustyhack/zabbix-agent
+    - docker run -d --privileged=true --net=host --name=zabbix-agent -p 10050:10050 -v /etc/zabbix/:/etc/zabbix:rw -v /proc:/data/proc -v /sys:/data/sys -v /dev:/data/dev -v /var/run/docker.sock:/var/run/docker.sock --env="ZABBIX_SERVER=monitoring.blackcreeper.com" --env="HOSTNAME=$(hostname)" krustyhack/zabbix-agent
     - docker logs -f zabbix-agent | tee -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log:
           background: true
     - while true; do if grep "Press Ctrl+C to exit" -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log; then break; else sleep 1; fi done
