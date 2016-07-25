@@ -49,7 +49,7 @@ update_config() {
 
       ##### First run #####
       if [[ ! -f /home/zabbix/zabbix_agentd.psk ]]; then
-	log "Generating rand hex..."
+	      log "Generating rand hex..."
         RAND_HEX=`date +%s | sha256sum | base64 | head -c 32`
         echo $RAND_HEX > /home/zabbix/zabbix_agentd.psk
         log "GENERATED ZABBIX RAND HEX to ${bold}${white}${RAND_HEX}${reset}."
