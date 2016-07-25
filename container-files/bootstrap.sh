@@ -39,10 +39,10 @@ update_config() {
       log "Updating Zabbix psk configuration..."
 
       log "Changing Zabbix TLSConnect to ${bold}${white}psk${reset}."
-      sed -i 's/# TLSConnect=/TLSConnect=psk/g' ${CONFIG_FILE}
+      sed -i 's/# TLSConnect=unencrypted/TLSConnect=psk/g' ${CONFIG_FILE}
 
       log "Changing Zabbix TLSAccept to ${bold}${white}psk${reset}."
-      sed -i 's/# TLSAccept=/TLSAccept=psk/g' ${CONFIG_FILE}
+      sed -i 's/# TLSAccept=unencrypted/TLSAccept=psk/g' ${CONFIG_FILE}
 
       log "Changing Zabbix TLSPSKIdentity to ${bold}${white}${HOSTNAME}${reset}."
       sed -i 's/# TLSPSKIdentity=/TLSPSKIdentity='$HOSTNAME'/g' ${CONFIG_FILE}
