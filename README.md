@@ -39,10 +39,13 @@ The Zabbix agent has been patched to read system informations from these directo
 	krustyhack/docker-zabbix-agent
 
 ### Get PSK
+	root@KrustyKali:~# docker logs zabbix-agent |grep "Zabbix Hostname"
+	[LOG 15:27:20] Changing Zabbix Hostname to MYZABBIXHOSTNAME.
+
 	root@KrustyKali:~# docker logs zabbix-agent |grep "GENERATED ZABBIX RAND HEX"
 	LOG 15:27:20] GENERATED ZABBIX RAND HEX to xxxxxxxxxxxxxxxxxxxxxxxxxxx[...]xxxx.
 
-Copy xxxxx[...]xxx into your zabbix host encryption panel on your zabbix server interface and you're done.
+Copy the "Zabbix hostname" and "ENERATED ZABBIX RAND HEX" into your zabbix host encryption panel on your zabbix server interface and you're done.
 
 ## Author  
 Author : Przemyslaw Ozgo (<linux@ozgo.info>) 
