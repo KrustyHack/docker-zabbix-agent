@@ -5,7 +5,10 @@ ENV ZABBIX_VERSION=3.0.1 \
   ZABBIX_SERVER=127.0.0.1 \
   HOSTNAME= \
   HOST_METADATA=zabbix.agent \
-  CONFIG_FILE=/usr/local/etc/zabbix_agentd.conf
+  CONFIG_FILE=/usr/local/etc/zabbix_agentd.conf \
+  ZABBIX_TLSPSKIDENTITY= \
+  ZABBIX_TLSACCEPT= \
+  ZABBIX_TLSCONNECT=
 
 RUN \
   yum clean all && yum makecache && \
