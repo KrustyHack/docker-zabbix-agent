@@ -35,7 +35,7 @@ update_config() {
     fi
 
     ##### Zabbix psk conf #####
-    if [[ "$ZABBIX_TLSACCEPT" != "" ]] && [[ "$ZABBIX_TLSCONNECT" != "" ]] && [[ "$ZABBIX_TLSPSKIDENTITY" != "" ]]; then
+    if [[ "$ZABBIX_PSK" == "yes" ]]; then
       log "Updating Zabbix psk configuration..."
 
       log "Generating rand hex..."
@@ -49,8 +49,8 @@ update_config() {
       log "Changing Zabbix TLSAccept to ${bold}${white}${ZABBIX_TLSACCEPT}${reset}."
       sed -i 's/# TLSAccept=/TLSAccept=psk/g' ${CONFIG_FILE}
 
-      log "Changing Zabbix TLSPSKFile to ${bold}${white}${ZABBIX_TLSPSKIDENTITY}${reset}."
-      sed -i 's/# TLSPSKFile=/TLSPSKIdentity='$ZABBIX_TLSPSKIDENTITY'/g' ${CONFIG_FILE}
+      log "Changing Zabbix TLSPSKIdentity to ${bold}${white}${HOSTNAME}${reset}."
+      sed -i 's/# TLSPSKIdentity=/TLSPSKIdentity='$HOSTNAME'/g' ${CONFIG_FILE}
 
       log "Changing Zabbix TLSPSKFile to ${bold}${white}${ZABBIX_TLSPSKFILE}${reset}."
       sed -i 's/# TLSPSKFile=/TLSPSKFile=/etc/zabbix/zabbix_agentd.psk/g' ${CONFIG_FILE}
