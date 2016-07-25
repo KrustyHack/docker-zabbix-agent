@@ -38,11 +38,6 @@ update_config() {
     if [ "$ZABBIX_PSK" == "yes" ]; then
       log "Updating Zabbix psk configuration..."
 
-      log "Generating rand hex..."
-      RAND_HEX=`date +%s | sha256sum | base64 | head -c 32`
-      echo $RAND_HEX > /etc/zabbix/zabbix_agentd.psk
-      log "GENERATED ZABBIX RAND HEX to ${bold}${white}${RAND_HEX}${reset}."
-
       log "Changing Zabbix TLSConnect to ${bold}${white}${ZABBIX_TLSCONNECT}${reset}."
       sed -i 's/# TLSConnect=/TLSConnect=psk/g' ${CONFIG_FILE}
 
@@ -52,8 +47,16 @@ update_config() {
       log "Changing Zabbix TLSPSKIdentity to ${bold}${white}${HOSTNAME}${reset}."
       sed -i 's/# TLSPSKIdentity=/TLSPSKIdentity='$HOSTNAME'/g' ${CONFIG_FILE}
 
-      log "Changing Zabbix TLSPSKFile to ${bold}${white}${ZABBIX_TLSPSKFILE}${reset}."
-      sed -i 's/# TLSPSKFile=/TLSPSKFile=/etc/zabbix/zabbix_agentd.psk/g' ${CONFIG_FILE}
+      ##### First run #####
+      if [ ! -f /etc/zabbix/zabbix_agentd.psk ]; then
+        log "Generating rand hex..."
+        RAND_HEX=`date +%s | sha256sum | base64 | head -c 32`
+        echo $RAND_HEX > /etc/zabbix/zabbix_agentd.psk
+        log "GENERATED ZABBIX RAND HEX to ${bold}${white}${RAND_HEX}${reset}."
+
+        log "Changing Zabbix TLSPSKFile to ${bold}${white}${ZABBIX_TLSPSKFILE}${reset}."
+        sed -i 's/# TLSPSKFile=/TLSPSKFile=/etc/zabbix/zabbix_agentd.psk/g' ${CONFIG_FILE}
+      fi
     fi
     log "Config updated"
 }
