@@ -16,11 +16,12 @@ The Zabbix agent has been patched to read system informations from these directo
 
 ## ENV variables
 
+`ZABBIX_VERSION` - Default to 3.0.1
 `ZABBIX_SERVER` - Zabbix Server address  
 `HOSTNAME` - hostname  (will check /etc/hostname if not manually configured)
 `HOST_METADATA` - the metadata value shared by all servers on the same cluster. This value will match the autoregistration action  
 `CONFIG_FILE` - config file path. (Used if custom file and path needed)
-`ZABBIX_PSK` - enabled PSK encryption. "yes" by default. Can be "yes" or "no"
+`ZABBIX_PSK` - enabled PSK encryption. "yes" by default. Can be "yes" or "no". If yes, watch the docker logs to get agent psk key.
 
 ## Usage
 ### Basic
