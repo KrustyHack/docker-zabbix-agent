@@ -1,5 +1,7 @@
 # Zabbix Agent Docker Image with PSK encryption
 
+[![CircleCI](https://circleci.com/gh/KrustyHack/docker-zabbix-agent.svg?style=svg)](https://circleci.com/gh/KrustyHack/docker-zabbix-agent)
+
 This is a docker image with Zabbix Agent and PSK encryption. It's based on CentOS-7 official image.  
 
 The Zabbix agent has been patched to read system informations from these directories:  
