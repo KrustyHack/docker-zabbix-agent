@@ -18,7 +18,7 @@ test:
     - docker run -d --privileged=true --net=host --name=zabbix-agent -p 10050:10050 -v /etc/zabbix/:/etc/zabbix:rw -v /proc:/data/proc -v /sys:/data/sys -v /dev:/data/dev -v /var/run/docker.sock:/var/run/docker.sock --env="ZABBIX_SERVER=monitoring.blackcreeper.com" --env="HOSTNAME=$(hostname)" krustyhack/zabbix-agent
     - docker logs -f zabbix-agent | tee -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log:
           background: true
-    - while true; do if grep "Press Ctrl+C to exit" -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log; then break; else sleep 1; fi done
+    - sleep 150
     - grep $ZABBIX_SERVER -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log
     - grep $HOSTNAME -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log
     - grep $HOST_METADATA -a ${CIRCLE_ARTIFACTS}/zabbix-agent.log
