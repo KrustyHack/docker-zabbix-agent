@@ -1,7 +1,7 @@
 FROM centos:centos7
 MAINTAINER KrustyHack webmaster@nicolashug.com
 
-ENV ZABBIX_VERSION=3.0.1 \
+ENV ZABBIX_VERSION=3.2.0 \
   ZABBIX_SERVER=127.0.0.1 \
   HOSTNAME= \
   HOST_METADATA=zabbix.agent \
@@ -34,7 +34,7 @@ COPY container-files /
 RUN \
   chown -R zabbix:wheel /usr/local/etc/
 
-USER zabbix
+#USER zabbix
 
 EXPOSE 10050
 
